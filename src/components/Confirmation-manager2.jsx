@@ -3,6 +3,7 @@ import "../styles/Confirmation-manager2.css";
 import ViewPoliciesIcon from "../assets/svg/viewpolice.svg";
 import NoteIcon from "../assets/svg/Note.svg";
 import WorkflowIcon from "../assets/svg/workflow-icon.svg";
+import saveDraft from "../assets/svg/Icon.svg";
 
 const RequiredInfo = ({ onClick, className = "" }) => {
   const [formData, setFormData] = useState({
@@ -295,9 +296,15 @@ const RequiredInfo = ({ onClick, className = "" }) => {
               </div>
             ))}
           </div>
-          <div className="average-rating">
-            <span className="average-label">Average Final Rating:</span>
-            <span className="average-value">0</span>
+          <div className="evaluation-footer">
+            <div className="average-rating">
+              <span className="average-label">Average Final Rating:</span>
+              <span className="average-value">0</span>
+            </div>
+            <button className="save-draft-button">
+              <img src={saveDraft} alt="Save as Draft" />
+              <span>Save as Draft</span>
+            </button>
           </div>
         </div>
 

@@ -92,9 +92,9 @@
   .competency-cell-header {
     padding: 12px 16px;
     font-family: "Samsung InterFace", "Segoe UI", Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    color: #333333;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(32,34,36,1);
     text-align: center;
     background-color: rgba(239, 246, 255, 1);
   }

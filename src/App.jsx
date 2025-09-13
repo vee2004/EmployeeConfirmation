@@ -11,7 +11,7 @@ import State4 from './components/State4'
 import State5 from './components/State5'
 
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 function App() {
   const [count, setCount] = useState(0)
 
@@ -20,6 +20,7 @@ function App() {
       <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Navigate to="/Confirmationmanager1" replace />} />
         <Route path="/Confirmationmanager1" element={<State1 />} />
         <Route path="/Confirmationmanager2" element={<State2 />} />
         <Route path="/PGHApproval" element={<State3 />} />
