@@ -71,6 +71,13 @@ const RequiredInfo = ({ onClick, className = "" }) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleChange("attachment", file);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onClick) onClick();
@@ -231,7 +238,14 @@ const RequiredInfo = ({ onClick, className = "" }) => {
               <div className="upload-title">Upload Document</div>
               <div className="upload-subtitle">PDF format • Max 3MB</div>
             </div>
-            <button className="upload-button">
+            <input
+              type="file"
+              id="file-upload"
+              accept=".pdf"
+              onChange={handleFileUpload}
+              style={{ display: 'none' }}
+            />
+            <button className="upload-button" onClick={() => document.getElementById('file-upload').click()}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 8.66667L8 4.66667M8 4.66667L12 8.66667M8 4.66667V11.3333" stroke="#007BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

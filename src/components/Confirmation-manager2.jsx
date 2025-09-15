@@ -4,6 +4,10 @@ import ViewPoliciesIcon from "../assets/svg/viewpolice.svg";
 import NoteIcon from "../assets/svg/Note.svg";
 import WorkflowIcon from "../assets/svg/workflow-icon.svg";
 import saveDraft from "../assets/svg/Icon.svg";
+import UploadIcon from "../assets/svg/upload.svg";
+import CloudIcon from "../assets/svg/Cloudimg.svg";
+
+
 
 const RequiredInfo = ({ onClick, className = "" }) => {
   const [formData, setFormData] = useState({
@@ -70,6 +74,13 @@ const RequiredInfo = ({ onClick, className = "" }) => {
 
   const handleChange = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleChange("attachment", file);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -231,19 +242,26 @@ const RequiredInfo = ({ onClick, className = "" }) => {
           <div className="section-heading">Attachment</div>
           <div className="upload-section">
             <div className="upload-icon">
-              <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="20" cy="20" r="20" fill="#F0F2F5"/>
-                <path d="M28 22.6667C28.5304 22.6667 29.0391 22.8774 29.4142 23.2525C29.7893 23.6276 30 24.1362 30 24.6667C30 26.8773 28.21 28.6667 26 28.6667H14C11.79 28.6667 10 26.8773 10 24.6667C10 22.6613 11.5553 21.0027 13.5 20.72V20.6667C13.5 18.136 15.634 16 18.1667 16C20.148 16 21.8427 17.2453 22.5 18.9173C22.6827 18.8853 22.864 18.8667 23.0507 18.8667C25.7893 18.8667 28 20.544 28 22.6667Z" stroke="#6C757D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M20 22.6667L20 12M20 12L22.5 14.5M20 12L17.5 14.5" stroke="#6C757D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <img src={CloudIcon} alt="Cloud Upload" width="43" height="43" />
             </div>
             <div className="upload-text">
               <div className="upload-title">Upload Document</div>
-              <div className="upload-subtitle">PDF format • Max 3MB</div>
+              <div className="upload-subtitle">PDF format • Max. 3MB</div>
             </div>
-            <button className="upload-button">
+            <input
+              type="file"
+              id="file-upload"
+              accept=".pdf"
+              onChange={handleFileUpload}
+              style={{ display: 'none' }}
+            />
+            <button 
+              className="upload-button"
+              onClick={() => document.getElementById('file-upload').click()}
+            >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 8.66667L8 4.66667M8 4.66667L12 8.66667M8 4.66667V11.3333" stroke="#007BFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 2L8 10M8 2L5 5M8 2L11 5" stroke="#38AEE0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 10L2 12C2 12.5304 2.21071 13.0391 2.58579 13.4142C2.96086 13.7893 3.46957 14 4 14L12 14C12.5304 14 13.0391 13.7893 13.4142 13.4142C13.7893 13.0391 14 12.5304 14 12L14 10" stroke="#38AEE0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
               Upload
             </button>

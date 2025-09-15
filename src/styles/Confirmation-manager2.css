@@ -159,6 +159,8 @@
     line-height: 1.4;
     display: flex;
     align-items: center;
+    
+
   }
 
   .emp-col-manager,
@@ -173,7 +175,7 @@
   .employee-header .emp-col-manager,
   .employee-header .emp-col-joining {
     background: #f0f7ff;
-    font-weight: 600;
+    font-weight: 700 !important;
     color: #333333;
   }
 

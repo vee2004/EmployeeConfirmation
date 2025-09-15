@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import "../styles/PGHApproval.css";
+import "../styles/Report.css";
 import ViewPoliciesIcon from "../assets/svg/viewpolice.svg";
 import NoteIcon from "../assets/svg/Note.svg";
 import WorkflowIcon from "../assets/svg/workflow-icon.svg";
+import saveDraft from "../assets/svg/Icon.svg";
+import UploadIcon from "../assets/svg/upload.svg";
+import CloudIcon from "../assets/svg/Cloudimg.svg";
 
 const RequiredInfo = ({ onClick, className = "" }) => {
   const [formData, setFormData] = useState({
@@ -71,6 +74,12 @@ const RequiredInfo = ({ onClick, className = "" }) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleChange("attachment", file);
+    }
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (onClick) onClick();
@@ -216,15 +225,35 @@ const RequiredInfo = ({ onClick, className = "" }) => {
 
         </div>
 
-        {/* RM Justification / Reason */}
-        <div className="rm-justification-section">
-          <div className="section-subheading">RM Justification / Reason</div>
-          <textarea
-            className="justification-textarea"
-            placeholder="xxx-xxx-xx-xxx-x"
-            value={formData.rmJustification}
-            onChange={(e) => handleChange("rmJustification", e.target.value)}
-          />
+        {/* Attachment Section */}
+        <div className="attachment-section">
+          <div className="section-heading">Attachment</div>
+          <div className="upload-section">
+            <div className="upload-icon">
+              <img src={CloudIcon} alt="Cloud Upload" width="43" height="43" />
+            </div>
+            <div className="upload-text">
+              <div className="upload-title">Upload Document</div>
+              <div className="upload-subtitle">PDF format • Max. 3MB</div>
+            </div>
+            <input
+              type="file"
+              id="file-upload"
+              accept=".pdf"
+              onChange={handleFileUpload}
+              style={{ display: 'none' }}
+            />
+            <button 
+              className="upload-button"
+              onClick={() => document.getElementById('file-upload').click()}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 2L8 10M8 2L5 5M8 2L11 5" stroke="#38AEE0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 10L2 12C2 12.5304 2.21071 13.0391 2.58579 13.4142C2.96086 13.7893 3.46957 14 4 14L12 14C12.5304 14 13.0391 13.7893 13.4142 13.4142C13.7893 13.0391 14 12.5304 14 12L14 10" stroke="#38AEE0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              Upload
+            </button>
+          </div>
         </div>
 
         {/* Evaluation Section */}
@@ -275,22 +304,59 @@ const RequiredInfo = ({ onClick, className = "" }) => {
           </div>
           <div className="average-rating">
             <span className="average-label">Average Final Rating:</span>
-            <span className="average-value" style={{ color: "green" }}>3.0</span>
+            <span className="average-value" style={{ color: "red" }}>2.1</span>
           </div>
-         
+          <div className="checkbox-container">
+            <input type="checkbox" id="approve-checkbox" />
+            <label htmlFor="approve-checkbox">
+              I here by Approve to confirm "{formData.employeeName}"
+            </label>
+          </div>
         </div>
 
-       
- 
+        {/* RM Justification Section */}
+        {/* <div className="rm-justification-section">
+          <div className="section-subheading">RM Justification / Reason</div>
+          <textarea
+            className="justification-textarea"
+            placeholder="xxx-xxx-xx-xxx-x"
+            value={formData.rmJustification}
+            onChange={(e) => handleChange("rmJustification", e.target.value)}
+          />
+        </div> */}
 
         {/* Comment Section */}
-
+        <div className="comment-section">
+          <div className="section-heading">Comment (Max 500 Chars)</div>
+          <textarea
+            className="comment-textarea"
+            placeholder="xxx-xxx-xx-xxx-x"
+            maxLength={500}
+            value={formData.comment}
+            onChange={(e) => handleChange("comment", e.target.value)}
+          />
+        </div>
 
         {/* Submit Button */}
-    
+        <div className="submit-section">
+          <button className="restart-button">Restart</button>
+          <button className="approve-button" onClick={handleSubmit}>
+            Approve
+          </button>
+        </div>
 
         {/* Transfer Workflow */}
-   
+        <div className="transfer-workflow">
+          <div className="transfer-icon">
+            <img src={WorkflowIcon} alt="Transfer Workflow" />
+          </div>
+          <span>Transfer Workflow</span>
+          <div className="transfer-arrow-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 12L10 8L6 4" stroke="#343A40" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+        </div>
 
         {/* View Policies */}
         <div className="view-policies-section">
